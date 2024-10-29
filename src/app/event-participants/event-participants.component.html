@@ -18,6 +18,21 @@
         </div>
       </div>
     </div>
+    <div class="col-md-3 text-right">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Número do ingresso"
+          [(ngModel)]="ticketNumber"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" type="button" (click)="makeCheckIn()">
+            Check-In
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="table-responsive">
@@ -36,7 +51,7 @@
           <td>{{ participant.first_name }} {{ participant.last_name }}</td>
           <td>{{ participant.email }}</td>
           <td class="text-center">
-            <button class="btn btn-primary btn-sm" (click)="viewDetails(participant.id)">Ver Participantes</button>
+            <button class="btn btn-primary btn-sm" (click)="viewDetails(participant.id)">Ver Participante</button>
           </td>
         </tr>
       </tbody>

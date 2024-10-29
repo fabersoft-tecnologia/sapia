@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SymplaService } from '../services/sympla.service';
 import { CommonModule } from '@angular/common';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -22,11 +22,14 @@ export class EventParticipantsComponent implements OnInit {
   pageSize: number = 10;
   cancelledFilter: string = 'include';
   totalParticipants: number = 0;
+  ticketNumber: string = '';
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private symplaService: SymplaService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -89,5 +92,20 @@ export class EventParticipantsComponent implements OnInit {
       this.currentPage--;
       this.loadParticipants();
     }
+  }
+
+  openCheckInModal() {
+    this.modalService.open('#checkInModal');
+  }
+
+  makeCheckIn() {
+    const eventId = this.eventId!;
+    this.symplaService.makeCheckInByTicketNumber(eventId, this.ticketNumber).subscribe(response => {
+      alert('Check-in realizado com sucesso!');
+      this.modalService.dismissAll();
+    }, error => {
+      this.errorMessage = error.error.message;
+      alert(this.errorMessage);
+    });
   }
 }
