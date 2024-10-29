@@ -79,4 +79,9 @@ export class SymplaService {
     const url = `${this.apiUrlv3}/${eventId}/participants/${participantId}/checkin`;
     return this.http.post(url, {}, this.getHeaders());
   }
+
+  makeCheckInByTicketNumber(eventId: string, ticketNumber: string): Observable<any> {
+    const url = `${this.apiUrlv3}/${eventId}/participants/ticketNumber/${ticketNumber}/checkIn`;
+    return this.http.post(url, {}, this.getHeaders());
+  }
 }
