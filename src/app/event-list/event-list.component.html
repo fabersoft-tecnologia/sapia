@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-5 display-4 text-primary">Eventos</h1>
+
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Pesquisar eventos..."
+        [(ngModel)]="searchTerm" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let event of filteredEvents()">
+      <div class="card mb-4 shadow-lg border-0 card-hover" (click)="viewDetails(event.id)">
+        <div class="card-body text-center">
+          <h5 class="card-title font-weight-bold text-uppercase">{{ event.name }}</h5>
+          <p class="card-text">
+            <i class="far fa-calendar-alt"></i> Data de Início: {{ event.start_date }}
+          </p>
+          <p class="card-text">
+            <i class="far fa-calendar-alt"></i> Data de Fim: {{ event.end_date }}
+          </p>
+          <p class="card-text">
+            <i class="fas fa-map-marker-alt"></i> Endereço: {{ event.address.address }}, {{ event.address.city }}, {{ event.address.state }}
+          </p>
+          <p class="card-text">
+           <img [src]="event.image" alt="Imagem do Evento" class="img-fluid">
+          </p>
+          <p class="card-text text-muted small">ID: {{ event.id }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="previousPage()">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link">{{ currentPage }}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

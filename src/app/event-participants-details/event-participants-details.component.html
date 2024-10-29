@@ -1,0 +1,38 @@
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="participant" class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h1 class="card-title">{{ participant.first_name }} {{ participant.last_name }}</h1>
+    </div>
+    <div class="card-body">
+      <p><strong>Email: </strong> <span>{{ participant.email }}</span></p>
+      <p><strong>Nome do Ingresso: </strong> <span>{{ participant.ticket_name }}</span></p>
+      <p><strong>Evento: </strong> <span>{{ participant.event_id }}</span></p>
+      <p><strong>Pedido: </strong> <span>{{ participant.order_id }}</span></p>
+      <p><strong>Status do Pedido: </strong>
+        <span *ngIf="participant.order_status === 'A'" class="badge badge-pill badge-success">Aprovado</span>
+        <span *ngIf="participant.order_status === 'P'" class="badge badge-pill badge-primary">Pendente</span>
+        <span *ngIf="participant.order_status === 'NA'" class="badge badge-pill badge-danger">Não Aprovado</span>
+        <span *ngIf="participant.order_status === 'NP'" class="badge badge-pill badge-warning">Não Pago</span>
+        <span *ngIf="participant.order_status === 'R'" class="badge badge-pill badge-danger">Pedido de Reembolso</span>
+        <span *ngIf="participant.order_status === 'C'" class="badge badge-pill badge-danger">Cancelado</span>
+      </p>
+      <p><strong>Data do Pedido: </strong> <span>{{ participant.order_date }}</span></p>
+      <p><strong>Data de Atualização do Pedido: </strong> <span>{{ participant.order_updated_date }}</span></p>
+      <p><strong>Data de Aprovação do Pedido: </strong> <span>{{ participant.order_approved_date }}</span></p>
+      <p><strong>Desconto do Pedido: </strong> <span>{{ participant.order_discount }}</span></p>
+      <p><strong>Número do Ingresso: </strong> <span>{{ participant.ticket_number }}</span></p>
+      <p><strong>QR Code do Ingresso: </strong> <span>{{ participant.ticket_num_qr_code }}</span></p>
+      <p><strong>Preço do Ingresso: </strong> <span>R${{ participant.ticket_sale_price.toFixed(2) }}</span></p>
+      <p *ngIf="participant.checkin[0]?.check_in === true"><strong>Check-in: </strong><span class="badge badge-pill badge-success">{{ participant.checkin[0]?.check_in ? 'Sim' : 'Não' }}</span></p>
+      <p *ngIf="participant.checkin[0]?.check_in === false"><strong>Check-in: </strong><span class="badge badge-pill badge-danger">{{ participant.checkin[0]?.check_in ? 'Sim' : 'Não' }}</span></p>
+      <p><strong>Data do Check-in: </strong> <span>{{ participant.checkin[0]?.check_in_date | date }}</span></p>
+      <button class="btn btn-success btn-lg" (click)="makeCheckIn(participant.event_id, participant.id)">
+        <i class="fas fa-check"></i> Fazer check-in
+      </button>
+    </div>
+  </div>
+</div>

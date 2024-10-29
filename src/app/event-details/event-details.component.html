@@ -1,0 +1,45 @@
+<div *ngIf="event" class="container mt-5">
+  <div class="card shadow-lg border-0 card-hover">
+    <div class="card-header bg-primary text-white">
+      <h1 class="card-title text-center">{{ event.name }}</h1>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Data de Início:</strong> {{ event.start_date }}</p>
+          <p><strong>Data de Fim:</strong> {{ event.end_date }}</p>
+          <p><strong>Endereço:</strong> {{ event.address.address }}, {{ event.address.city }}, {{ event.address.state }}</p>
+          <p><strong>Descrição do Organizador:</strong> {{ event.host.description }}</p>
+          <p><strong>Nome do Local:</strong> {{ event.address.name }}</p>
+          <p><strong>Número do Endereço:</strong> {{ event.address.address_num }}</p>
+          <p><strong>Bairro:</strong> {{ event.address.neighborhood }}</p>
+          <p><strong>CEP:</strong> {{ event.address.zip_code }}</p>
+          <p><strong>Latitude:</strong> {{ event.address.lat }}</p>
+          <p><strong>Longitude:</strong> {{ event.address.lon }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Categoria Primária:</strong> {{ event.category_prim.name }}</p>
+          <p><strong>Categoria Secundária:</strong> {{ event.category_sec.name }}</p>
+          <p><strong>Organizador:</strong> {{ event.host.name }}</p>
+          <p><strong>URL do Evento:</strong> <a [href]="event.url" target="_blank">{{ event.url }}</a></p>
+          <p><strong>Imagem do Evento:</strong> <img [src]="event.image" alt="Imagem do Evento" class="img-fluid"></p>
+
+        </div>
+      </div>
+      <div class="mt-4">
+        <p><strong>Detalhes do Evento:</strong></p>
+        <div [innerHTML]="event.detail"></div>
+        <div class="mt-4">
+          <p *ngIf="event.private_event"><span class="badge badge-pill badge-primary">Evento Privado</span></p>
+          <p *ngIf="event.published"> <span class="badge badge-pill badge-success">Evento Publicado</span></p>
+          <p *ngIf="event.cancelled"> <span class="badge badge-pill badge-danger">Evento Cancelado</span></p>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-primary btn-lg" (click)="viewParticipants(event.id)">Ver Participantes</button>
+        <button class="btn btn-secondary btn-lg ml-3" (click)="viewAffiliates(event.id)">Ver Afiliados</button>
+        <button class="btn btn-success btn-lg ml-3" (click)="viewOrders(event.id)">Ver Pedidos</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Afiliados</h1>
+  <div class="input-group mb-4">
+    <input type="text" class="form-control" placeholder="Buscar por nome" [(ngModel)]="searchTerm" (input)="filterAffiliates()" />
+    <div class="input-group-append">
+      <span class="input-group-text">
+        <i class="fas fa-search"></i>
+      </span>
+    </div>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Tipo de Comissão</th>
+        <th>Comissão</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let affiliate of filteredAffiliates">
+        <td>{{ affiliate.name }}</td>
+        <td>{{ affiliate.commission_type }}</td>
+        <td>R$ {{ affiliate.commission_value }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="previousPage()">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link">{{ currentPage }}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

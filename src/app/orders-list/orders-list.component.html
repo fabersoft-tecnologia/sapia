@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Pedidos do evento {{ eventId }} ({{totalOrders}})</h1>
+
+  <div class="input-group mb-4 justify-content-center">
+    <input
+      type="text"
+      class="form-control w-25"
+      placeholder="Buscar por ID do Pedido..."
+      [(ngModel)]="searchInput"
+      (keydown)="onSearchKeydown($event)"
+    />
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" (click)="searchOrder()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID do Pedido</th>
+        <th>Nome do Comprador</th>
+        <th>Status do Pedido</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of filteredOrders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.buyer_first_name }} {{ order.buyer_last_name }}</td>
+        <td><span *ngIf="order.order_status === 'A'" class="badge badge-pill badge-success">Aprovado</span>
+          <span *ngIf="order.order_status === 'P'" class="badge badge-pill badge-primary">Pendente</span>
+          <span *ngIf="order.order_status === 'NA'" class="badge badge-pill badge-danger">Não Aprovado</span>
+          <span *ngIf="order.order_status === 'NP'" class="badge badge-pill badge-warning">Não Pago</span>
+          <span *ngIf="order.order_status === 'R'" class="badge badge-pill badge-danger">Pedido de Reembolso</span>
+          <span *ngIf="order.order_status === 'C'" class="badge badge-pill badge-danger">Cancelado</span></td>
+        <td>
+          <button class="btn btn-primary" (click)="viewDetails(order.id)">
+            <i class="fas fa-eye"></i> Ver Pedido
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="previousPage()">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link">{{ currentPage }}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

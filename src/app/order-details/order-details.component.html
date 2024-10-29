@@ -1,0 +1,122 @@
+<div *ngIf="order" class="container mt-5">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white text-center">
+      <h1 class="card-title">{{ order.id }}</h1>
+    </div>
+    <div class="card-body">
+      <h5 class="card-subtitle mb-4 text-muted">Detalhes do Pedido</h5>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <p>
+            <strong>Código do Evento:</strong>
+            <span class="ml-2">{{ order.event_id }}</span>
+          </p>
+          <p>
+            <strong>Data de Pedido:</strong>
+            <span class="ml-2">{{ order.order_date | date: 'dd/MM/yyyy' }}</span>
+          </p>
+          <p>
+            <strong>Status do Pedido:</strong>
+            <span *ngIf="order.order_status === 'A'" class="badge badge-pill badge-success">Aprovado</span>
+            <span *ngIf="order.order_status === 'P'" class="badge badge-pill badge-primary">Pendente</span>
+            <span *ngIf="order.order_status === 'NA'" class="badge badge-pill badge-danger">Não Aprovado</span>
+            <span *ngIf="order.order_status === 'NP'" class="badge badge-pill badge-warning">Não Pago</span>
+            <span *ngIf="order.order_status === 'R'" class="badge badge-pill badge-danger">Pedido de Reembolso</span>
+            <span *ngIf="order.order_status === 'C'" class="badge badge-pill badge-danger">Cancelado</span>
+          </p>
+          <p>
+            <strong>Data de Atualização:</strong>
+            <span class="ml-2">{{ order.updated_date | date: 'dd/MM/yyyy' }}</span>
+          </p>
+          <p>
+            <strong>Data Aprovada:</strong>
+            <span class="ml-2">{{ order.approved_date | date: 'dd/MM/yyyy' }}</span>
+          </p>
+        </div>
+        <div class="col-md-6 mb-3">
+          <p>
+            <strong>Código de Desconto:</strong>
+            <span class="ml-2">{{ order.discount_code }}</span>
+          </p>
+          <p>
+            <strong>Tipo de Transação:</strong>
+            <span class="ml-2">{{ order.transaction_type }}</span>
+          </p>
+          <p>
+            <strong>Valor Total:</strong>
+            <span class="ml-2">R$ {{ order.order_total_sale_price.toFixed(2) }}</span>
+          </p>
+          <p>
+            <strong>Valor Líquido:</strong>
+            <span class="ml-2">R$ {{ order.order_total_net_value.toFixed(2) }}</span>
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <h5>Informações do Comprador</h5>
+          <p>
+            <strong>Nome do Comprador:</strong>
+            <span class="ml-2">{{ order.buyer_first_name }} {{ order.buyer_last_name }}</span>
+          </p>
+          <p>
+            <strong>Email do Comprador:</strong>
+            <span class="ml-2">{{ order.buyer_email }}</span>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <h5>Informações da Fatura</h5>
+          <p>
+            <strong>Tipo de Documento:</strong>
+            <span class="ml-2">{{ order.invoice_info.doc_type }}</span>
+          </p>
+          <p>
+            <strong>Número do Documento:</strong>
+            <span class="ml-2">{{ order.invoice_info.doc_number }}</span>
+          </p>
+          <p>
+            <strong>Nome para Faturamento:</strong>
+            <span class="ml-2">{{ order.invoice_info.client_name }}</span>
+          </p>
+          <p>
+            <strong>CEP:</strong>
+            <span class="ml-2">{{ order.invoice_info.address_zip_code }}</span>
+          </p>
+          <p>
+            <strong>Endereço:</strong>
+            <span class="ml-2">{{ order.invoice_info.address_street }}</span>
+          </p>
+          <p>
+            <strong>Número do Endereço:</strong>
+            <span class="ml-2">{{ order.invoice_info.address_street_number }}</span>
+          </p>
+          <p>
+            <strong>Complemento:</strong>
+            <span class="ml-2">{{ order.invoice_info.address_street2 }}</span>
+          </p>
+          <p>
+            <strong>Bairro:</strong>
+            <span class="ml-2">{{ order.invoice_info.address_neighborhood }}</span>
+          </p>
+          <p>
+            <strong>Cidade:</strong>
+            <span class="ml-2">{{ order.invoice_info.address_city }}</span>
+          </p>
+          <p>
+            <strong>Estado:</strong>
+            <span class="ml-2">{{ order.invoice_info.address_state }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mb-4">
+      <button
+        class="btn btn-primary btn-lg"
+        (click)="viewParticipants(order.id)"
+      >
+        Ver Ingressos
+      </button>
+    </div>
+  </div>
+</div>

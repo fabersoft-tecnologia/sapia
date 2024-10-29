@@ -1,0 +1,59 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-5 display-4 text-success">Participantes do Evento ({{ totalParticipants }})</h1>
+
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Pesquisar por número do ingresso..."
+          [(ngModel)]="searchInput"
+          (keydown)="onSearchKeydown($event)"
+        />
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" (click)="searchParticipant()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Ingresso</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col" class="text-center">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let participant of filteredParticipants()" class="table-row-hover">
+          <td>{{ participant.ticket_number }}</td>
+          <td>{{ participant.first_name }} {{ participant.last_name }}</td>
+          <td>{{ participant.email }}</td>
+          <td class="text-center">
+            <button class="btn btn-primary btn-sm" (click)="viewDetails(participant.id)">Ver Participantes</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="previousPage()">Anterior</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link">{{ currentPage }}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" (click)="nextPage()">Próximo</a>
+      </li>
+    </ul>
+  </nav>
+</div>
