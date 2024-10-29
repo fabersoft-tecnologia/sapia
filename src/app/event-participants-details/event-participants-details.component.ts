@@ -29,7 +29,7 @@ export class EventParticipantsDetailsComponent implements OnInit, OnDestroy {
 
     this.intervalId = setInterval(() => {
       this.loadParticipant(eventId, participantId);
-    }, 30000);
+    }, 10000);
   }
 
   ngOnDestroy() {

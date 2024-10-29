@@ -1,6 +1,23 @@
 <div class="container mt-5">
-  <h1 class="text-center mb-5 display-4 text-success">Participantes do Evento ({{ totalParticipants }})</h1>
-
+  <h1 class="text-center mb-2 display-4 text-success">Participantes do Evento</h1>
+  <h3 class="text-center mb-5 display-8 text-success">Total de Participantes:   {{ totalParticipants }}</h3>
+  <div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Número do ingresso"
+        [(ngModel)]="ticketNumber"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary" type="button" (click)="makeCheckIn()">
+          Check-In
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
   <div class="row mb-4">
     <div class="col-md-6 offset-md-3">
       <div class="input-group">
@@ -18,21 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-3 text-right">
-      <div class="input-group">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Número do ingresso"
-          [(ngModel)]="ticketNumber"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-outline-primary" type="button" (click)="makeCheckIn()">
-            Check-In
-          </button>
-        </div>
-      </div>
-    </div>
+
   </div>
 
   <div class="table-responsive">
