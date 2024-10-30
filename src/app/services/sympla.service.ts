@@ -8,13 +8,13 @@ import { Observable } from "rxjs";
 export class SymplaService {
   private apiUrl = "https://api.sympla.com.br/public/v4/events";
   private apiUrlv3 = "https://api.sympla.com.br/public/v3/events";
-
+  /*
   private apiToken =
     "1be88945fd97c7ebf600d2437daf024d15925626691f60a57fb502f52f6b6e4e";
-
-  /*
-  private apiToken = '7617a33f0b3798fd4d401923ace8d22e0eab094fa1bfaf92a6e18d5e901b058c';
 */
+
+  private apiToken = '7617a33f0b3798fd4d401923ace8d22e0eab094fa1bfaf92a6e18d5e901b058c';
+
 
   constructor(private http: HttpClient) {}
 
