@@ -8,13 +8,9 @@ import { Observable } from "rxjs";
 export class SymplaService {
   private apiUrl = "https://api.sympla.com.br/public/v4/events";
   private apiUrlv3 = "https://api.sympla.com.br/public/v3/events";
-  /*
-  private apiToken =
-    "1be88945fd97c7ebf600d2437daf024d15925626691f60a57fb502f52f6b6e4e";
-*/
-
   private apiToken = '7617a33f0b3798fd4d401923ace8d22e0eab094fa1bfaf92a6e18d5e901b058c';
-
+  // private leoApiToken =
+  //   "1be88945fd97c7ebf600d2437daf024d15925626691f60a57fb502f52f6b6e4e";
 
   constructor(private http: HttpClient) {}
 
@@ -30,21 +26,27 @@ export class SymplaService {
     url: string,
     page: number,
     pageSize: number,
-    cancelledFilter: string = "include"
+    cancelledFilter: string = "include",
+    fieldSort: string = "start_date",
+    sort: string = "DESC"
   ): string {
-    return `${url}?page=${page}&page_size=${pageSize}&cancelled_filter=${cancelledFilter}`;
+    return `${url}?page=${page}&page_size=${pageSize}&cancelled_filter=${cancelledFilter}&field_sort=${fieldSort}&sort=${sort}`;
   }
 
   getEvents(
     page: number = 1,
     pageSize: number = 20,
-    cancelledFilter: string = "include"
+    cancelledFilter: string = "include",
+    fieldSort: string = "start_date",
+    sort: string = "DESC"
   ): Observable<any> {
     const url = this.getPaginatedUrl(
       this.apiUrl,
       page,
       pageSize,
-      cancelledFilter
+      cancelledFilter,
+      fieldSort,
+      sort
     );
     return this.http.get(url, this.getHeaders());
   }
@@ -53,13 +55,17 @@ export class SymplaService {
     eventId: string,
     page: number = 1,
     pageSize: number = 20,
-    cancelledFilter: string = "include"
+    cancelledFilter: string = "include",
+    fieldSort: string = "start_date",
+    sort: string = "DESC"
   ): Observable<any> {
     const url = this.getPaginatedUrl(
       `${this.apiUrl}/${eventId}`,
       page,
       pageSize,
-      cancelledFilter
+      cancelledFilter,
+      fieldSort,
+      sort
     );
     return this.http.get(url, this.getHeaders());
   }
