@@ -26,11 +26,9 @@ export class SymplaService {
     url: string,
     page: number,
     pageSize: number,
-    cancelledFilter: string = "include",
-    fieldSort: string = "start_date",
-    sort: string = "DESC"
+    cancelledFilter: string = "include"
   ): string {
-    return `${url}?page=${page}&page_size=${pageSize}&cancelled_filter=${cancelledFilter}&field_sort=${fieldSort}&sort=${sort}`;
+    return `${url}?page=${page}&page_size=${pageSize}&cancelled_filter=${cancelledFilter}`;
   }
 
   getEvents(
@@ -40,33 +38,12 @@ export class SymplaService {
     fieldSort: string = "start_date",
     sort: string = "DESC"
   ): Observable<any> {
-    const url = this.getPaginatedUrl(
-      this.apiUrl,
-      page,
-      pageSize,
-      cancelledFilter,
-      fieldSort,
-      sort
-    );
+    const url = `${this.apiUrl}?page=${page}&page_size=${pageSize}&cancelled_filter=${cancelledFilter}&field_sort=${fieldSort}&sort=${sort}`;
     return this.http.get(url, this.getHeaders());
   }
 
-  getEventById(
-    eventId: string,
-    page: number = 1,
-    pageSize: number = 20,
-    cancelledFilter: string = "include",
-    fieldSort: string = "start_date",
-    sort: string = "DESC"
-  ): Observable<any> {
-    const url = this.getPaginatedUrl(
-      `${this.apiUrl}/${eventId}`,
-      page,
-      pageSize,
-      cancelledFilter,
-      fieldSort,
-      sort
-    );
+  getEventById(eventId: string): Observable<any> {
+    const url = `${this.apiUrl}/${eventId}`;
     return this.http.get(url, this.getHeaders());
   }
 
@@ -87,17 +64,9 @@ export class SymplaService {
 
   getOrderById(
     eventId: string,
-    orderId: string,
-    page: number = 1,
-    pageSize: number = 20,
-    cancelledFilter: string = "include"
+    orderId: string
   ): Observable<any> {
-    const url = this.getPaginatedUrl(
-      `${this.apiUrlv3}/${eventId}/orders/${orderId}`,
-      page,
-      pageSize,
-      cancelledFilter
-    );
+    const url = `${this.apiUrlv3}/${eventId}/orders/${orderId}`;
     return this.http.get(url, this.getHeaders());
   }
 
@@ -129,33 +98,17 @@ export class SymplaService {
 
   getParticipantById(
     eventId: string,
-    participantId: string,
-    page: number = 1,
-    pageSize: number = 20,
-    cancelledFilter: string = "include"
+    participantId: string
   ): Observable<any> {
-    const url = this.getPaginatedUrl(
-      `${this.apiUrlv3}/${eventId}/participants/${participantId}`,
-      page,
-      pageSize,
-      cancelledFilter
-    );
+    const url = `${this.apiUrlv3}/${eventId}/participants/${participantId}`;
     return this.http.get(url, this.getHeaders());
   }
 
   getParticipantByTicketNumber(
     eventId: string,
-    ticketNumber: string,
-    page: number = 1,
-    pageSize: number = 20,
-    cancelledFilter: string = "include"
+    ticketNumber: string
   ): Observable<any> {
-    const url = this.getPaginatedUrl(
-      `${this.apiUrlv3}/${eventId}/participants/ticketNumber/${ticketNumber}`,
-      page,
-      pageSize,
-      cancelledFilter
-    );
+    const url = `${this.apiUrlv3}/${eventId}/participants/ticketNumber/${ticketNumber}`;
     return this.http.get(url, this.getHeaders());
   }
 
